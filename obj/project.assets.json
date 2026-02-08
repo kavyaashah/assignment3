@@ -295,19 +295,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kavya\\.nuget\\packages\\": {}
+    "/Users/caitlynpratt/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kavya\\MonoGame\\A3_NovelVisualization\\A3_NovelVisualization.csproj",
+      "projectUniqueName": "/Users/caitlynpratt/Desktop/2026 Spring/graphic and visualization/Assignment 3/A3_NovelVisualization.csproj",
       "projectName": "A3_NovelVisualization",
-      "projectPath": "C:\\Users\\kavya\\MonoGame\\A3_NovelVisualization\\A3_NovelVisualization.csproj",
-      "packagesPath": "C:\\Users\\kavya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kavya\\MonoGame\\A3_NovelVisualization\\obj\\",
+      "projectPath": "/Users/caitlynpratt/Desktop/2026 Spring/graphic and visualization/Assignment 3/A3_NovelVisualization.csproj",
+      "packagesPath": "/Users/caitlynpratt/.nuget/packages/",
+      "outputPath": "/Users/caitlynpratt/Desktop/2026 Spring/graphic and visualization/Assignment 3/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kavya\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/caitlynpratt/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -360,19 +360,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[9.0.11, 9.0.11]"
+            "version": "[9.0.12, 9.0.12]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[9.0.11, 9.0.11]"
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[9.0.12, 9.0.12]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.11, 9.0.11]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[9.0.11, 9.0.11]"
+            "version": "[9.0.12, 9.0.12]"
           }
         ],
         "frameworkReferences": {
@@ -380,7 +376,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
