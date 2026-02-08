@@ -135,10 +135,10 @@ public class Game1 : Game
 
         DisplayUniqueWords();
         
-        
         String path_2 = Path.GetFullPath("Content/wordfrequency.txt");
         wordfreq = File.ReadAllText(path_2);
         // build dictionary
+
         BuildWordFrequency();
 
     }
