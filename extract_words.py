@@ -52,14 +52,14 @@ def main():
     print(f"Unique words: {len(unique_words)}")
 
 
-    with open("allwords.txt", "w") as output_file:
+    with open("Content/allwords.txt", "w") as output_file:
         for word in all_words:
             output_file.write(word + '\n')
-    with open("uniquewords.txt", "w") as output_file:
+    with open("Content/uniquewords.txt", "w") as output_file:
         for word in unique_words:
             output_file.write(word + "\n")
     
-    with open("wordfrequency.txt", "w") as output_file:
+    with open("Content/wordfrequency.txt", "w") as output_file:
         for count in sorted(freq_freqs.keys()):
             output_file.write(f"{count}: {freq_freqs[count]}\n")
     

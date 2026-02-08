@@ -135,11 +135,9 @@ public class Game1 : Game
 
         DisplayUniqueWords();
         
-        using (var stream = TitleContainer.OpenStream("Content/files/wordTextFrequncy.txt"))
-        using (var reader = new StreamReader(stream))
-        {
-            wordfreq = reader.ReadToEnd();
-        }
+        
+        String path_2 = Path.GetFullPath("Content/wordfrequency.txt");
+        wordfreq = File.ReadAllText(path_2);
         // build dictionary
         BuildWordFrequency();
 
