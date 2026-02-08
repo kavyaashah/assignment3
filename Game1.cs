@@ -63,11 +63,11 @@ public class Game1 : Game
         String path = Path.GetFullPath("Content/uniquewords.txt");
         _uniqueWords = File.ReadAllLines(path).ToList();
 
-        WordCloud();
+        DisplayUniqueWords();
 
     }
 
-    private void WordCloud()
+    private void DisplayUniqueWords()
     {
         Random random = new Random();
         
@@ -123,7 +123,7 @@ public class Game1 : Game
 
         if (mouse.LeftButton == ButtonState.Pressed && _previousMouse.LeftButton == ButtonState.Released)
         {
-            WordCloud();
+            DisplayUniqueWords();
         }
 
         _previousMouse = mouse;
