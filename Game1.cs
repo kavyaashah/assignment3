@@ -14,20 +14,17 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private SpriteFont _font;
-    private Color _color;
-    private int _index;
+    private Color[] _palette;
     private List<string> _uniqueWords;
-    private List<string> _displayedWords;
-    private Vector2 _currentLineWidth;
-    private Color[] _colors;
-
+    private List<string> _shuffledWords;
     private List<string> _words;
     private List<Vector2> _positions;
     private List<Color> _cloudColors;
 
-    private int canvasWidth;
-    private int canvasHeight;
-    
+    private int _canvasWidth;
+    private int _canvasHeight;
+
+    private MouseState _previousMouse;
 
     public Game1()
     {
@@ -39,20 +36,18 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        _colors = new Color[]
+        _palette = new Color[]
         {
-            Color.Lavender,
-            Color.LightBlue,
+            Color.MediumPurple,
+            Color.CornflowerBlue,
             Color.LightPink
         };
-
-        _currentLineWidth = new Vector2(0, 0);
-
-        canvasWidth = 700;
-        canvasHeight = 600;
         
-        _graphics.PreferredBackBufferWidth = canvasWidth;
-        _graphics.PreferredBackBufferHeight = canvasHeight;
+        _canvasWidth = 700;
+        _canvasHeight = 600;
+        
+        _graphics.PreferredBackBufferWidth = _canvasWidth;
+        _graphics.PreferredBackBufferHeight = _canvasHeight;
         _graphics.ApplyChanges();
 
         base.Initialize();
@@ -65,9 +60,11 @@ public class Game1 : Game
         // TODO: use this.Content to load your game content here
         _font = Content.Load<SpriteFont>("fonts/font");
 
-        string path = Path.Combine(Content.RootDirectory, "uniquewords.txt");
+        String path = Path.GetFullPath("Content/uniquewords.txt");
         _uniqueWords = File.ReadAllLines(path).ToList();
-        
+
+        WordCloud();
+
     }
 
     private void WordCloud()
@@ -77,41 +74,43 @@ public class Game1 : Game
         //new word cloud
         _words = new List<string>();
         _positions = new List<Vector2>();
-        _colors = new List<Color>();
+        _cloudColors = new List<Color>();
 
-        Vector2 _current = new Vector2(0, 0);
+        Vector2 current = new Vector2(20, 20);
         
         float lineHeight = _font.LineSpacing;
+        float spacing = 10f;
 
-        int c1 = random.Next(3);
-        List<string> shuffledWords = _uniqueWords.OrderBy(x => random.Next()).ToList();
+        int c1 = random.Next(_palette.Length);
+        _shuffledWords = _uniqueWords.OrderBy(x => random.Next()).ToList();
 
-        _index = 0;
+        int index = 0;
 
-        foreach (var word in shuffledWords)
+        foreach (var word in _shuffledWords)
         {
             Vector2 wordSize = _font.MeasureString(word);
             
             //wrapping
-            if (_current.X + wordSize.X > canvasWidth)
+            if (current.X + wordSize.X > _canvasWidth)
             {
-                _current.X = 20;
-                _current.Y += lineHeight;
+                current.X = 20;
+                current.Y += lineHeight + spacing;
             }
 
-            if (_current.Y + wordSize.Y > canvasHeight)
+            if (current.Y + wordSize.Y > _canvasHeight)
             {
                 break;
             }
             
             _words.Add(word);
-            _positions.Add(_current);
-            _cloudColors.Add(_colors[(c1 + _index) % _colors.Length]);
-            
+            _positions.Add(current);
+            _cloudColors.Add(_palette[(c1 + index) % _palette.Length]);
+
+            current.X += wordSize.X + spacing;
+            index++;
+
         }
-
-
-
+        
     }
     
     protected override void Update(GameTime gameTime)
@@ -120,23 +119,35 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        _color = Color.White; 
+        MouseState mouse = Mouse.GetState();
+
+        if (mouse.LeftButton == ButtonState.Pressed && _previousMouse.LeftButton == ButtonState.Released)
+        {
+            WordCloud();
+        }
+
+        _previousMouse = mouse;
+        
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.White);
         
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
-        _spriteBatch.DrawString(
-            _font,
-            string, 
-            Vector2.Zero,
-            _color
-        );
+        for (int i = 0; i < _words.Count; i++)
+        {
+            _spriteBatch.DrawString(
+                _font,
+                _words[i], 
+                _positions[i],
+                _cloudColors[i]
+            );
+        }
+        
         _spriteBatch.End();
 
         base.Draw(gameTime);
