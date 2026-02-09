@@ -235,7 +235,7 @@ public class Game1 : Game
                 (int)normalizedHeight
             );
             //draw created rectangle to the texture (chart)
-            _spriteBatch.Draw(texture, bar, Color.White);
+            _spriteBatch.Draw(texture, bar, Color.SteelBlue);
 
         }
     }
@@ -252,6 +252,16 @@ public class Game1 : Game
         {
             _held = false;
         }
+        MouseState mouse = Mouse.GetState();
+        
+
+        if (mouse.LeftButton == ButtonState.Pressed && _previousMouse.LeftButton == ButtonState.Released)
+
+        {
+            DisplayUniqueWords();
+        }
+        
+        _previousMouse = mouse;
         
 
         base.Update(gameTime);
@@ -259,7 +269,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.LightSteelBlue);
+        GraphicsDevice.Clear(Color.White);
         
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
