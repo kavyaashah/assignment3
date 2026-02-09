@@ -11,6 +11,7 @@ namespace A3_NovelVisualization;
 
 public class Game1 : Game
 {
+    //functions for creating wordcloud and unique words
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private SpriteFont _font;
@@ -77,7 +78,7 @@ public class Game1 : Game
     }
     private void TextInputCallback(object sender, TextInputEventArgs args)
     {
-        //if enter key is pressed, switch displaying bools
+        //if enter key is pressed and not being held, switch displaying bools
         switch (args.Key)
         {
             case Keys.Enter:
@@ -213,7 +214,7 @@ public class Game1 : Game
         //int s_width = Window.ClientBounds.Width;
         int s_height = Window.ClientBounds.Height;
         int spacing = 5;
-        int barWidth = 10;
+        int barWidth = 7;
         //(s_width - 100) / totalBars
         int startx = 50;
         int basey = s_height - 50;
@@ -245,16 +246,7 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        /*
-        MouseState mouse = Mouse.GetState();
-
-        if (mouse.LeftButton == ButtonState.Pressed && _previousMouse.LeftButton == ButtonState.Released)
-        {
-            DisplayUniqueWords();
-        }
-        
-        _previousMouse = mouse;
-        */
+        //check if enter button is being held
         _keyboardState = Keyboard.GetState();
         if (!_keyboardState.IsKeyDown(Keys.Enter))
         {
@@ -271,17 +263,7 @@ public class Game1 : Game
         
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
-        /*
-        for (int i = 0; i < _words.Count; i++)
-        {
-            _spriteBatch.DrawString(
-                _font,
-                _words[i], 
-                _positions[i],
-                _cloudColors[i]
-            );
-        }*/
-        
+        //conditional for displaying unique words or word frequency
         if (display_unique)
         {
             window_DisplayUniqueWords(_spriteBatch);
